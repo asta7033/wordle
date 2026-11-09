@@ -1,4 +1,4 @@
-# Wordle Pygame Client + FastAPI Server
+# 雲端技術與應用期中 Wordle
 
 ## 功能
 - 任務一：第 6 次猜錯時，後端回傳 `target_word`，前端顯示 `Game Over! The word was XXXXX. Press R to restart.`；每次猜錯顯示 `Keep guessing! (N tries left)`
@@ -21,3 +21,9 @@ $env:API_BASE_URL="http://127.0.0.1:8000"; python client.py
 2. Build Command：`pip install -r requirements.txt`
 3. Start Command：`uvicorn server:app --host 0.0.0.0 --port $PORT`
 4. 部署完成後把 `client.py` 的 `API_BASE_URL` 預設值換成 Render 網址再 commit push
+```bash
+ ／|_
+（ﾟω ｡ 7
+  |    \
+  しし__,)ノ
+
