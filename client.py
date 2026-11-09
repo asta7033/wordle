@@ -171,15 +171,20 @@ class WordleGame:
             self.message = "Network error during guess!"
 
     def handle_keydown(self, event):
-        if event.key == pygame.K_r:
+        # R / H 也是英文字母（例如 TRAIN、HOUSE），遊戲進行中直接按要能輸入。
+        # 因此：遊戲結束（或未連線）時直接按 R / H；遊戲進行中改用 Ctrl+R / Ctrl+H。
+        ctrl = bool(event.mod & pygame.KMOD_CTRL)
+        idle = self.game_over or self.game_id is None
+
+        if event.key == pygame.K_r and (ctrl or idle):
             self.start_new_game()
             return
 
-        if event.key == pygame.K_h:
+        if event.key == pygame.K_h and (ctrl or idle):
             self.toggle_hard_mode()
             return
 
-        if self.game_over:
+        if self.game_over or ctrl:
             return
 
         if event.key == pygame.K_BACKSPACE:
@@ -264,7 +269,7 @@ class WordleGame:
         msg_rect = msg_surface.get_rect(center=(WIDTH // 2, HEIGHT - 50))
         surface.blit(msg_surface, msg_rect)
 
-        hint = tiny_font.render("ENTER: submit   BACKSPACE: delete   R: restart   H: toggle Hard Mode", True, COLOR_SUBTEXT)
+        hint = tiny_font.render("ENTER: submit   Ctrl+R: restart   Ctrl+H: Hard Mode   (R / H after game over)", True, COLOR_SUBTEXT)
         surface.blit(hint, hint.get_rect(center=(WIDTH // 2, HEIGHT - 20)))
 
 
